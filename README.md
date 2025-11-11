@@ -96,6 +96,42 @@ TouchDesigner(9091) ◄──► Node.js Server ◄──► Browser(9092)
 
 ---
 
+## ⚡ 빠른 실행
+
+### 1. Node.js 설치 확인
+
+```bash
+C:\Users> node --version
+C:\Users> npm --version
+```
+
+Node.js 미설치 시: https://nodejs.org/ 에서 다운로드
+
+### 2. 프로젝트 실행
+
+```bash
+# 프로젝트 폴더로 이동
+C:\Users> cd Desktop/test-log-json/td-web-interaction
+
+# 의존성 설치
+C:\Users\Desktop\test-log-json\td-web-interaction> npm install
+
+# WebSocket 서버 시작 (터미널 1)
+C:\Users\Desktop\test-log-json\td-web-interaction> node server/websocket-server.js
+
+# Next.js 개발 서버 시작 (새 터미널 2)
+C:\Users\Desktop\test-log-json\td-web-interaction> npm run dev
+
+# 브라우저에서 http://localhost:3000 접속
+```
+
+### TouchDesigner 연결
+```python
+op('websocket1').sendText('Hello from TD!')
+```
+
+---
+
 ## 🚀 시작하기
 
 ### 필수 요구사항
