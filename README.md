@@ -1,5 +1,7 @@
 # TD Web Interaction
 
+<img src="./assets/screenshot.png" width="600">
+
 TouchDesigner와 웹 브라우저 간 실시간 데이터 송수신 프로젝트
 
 ## 📋 개요
