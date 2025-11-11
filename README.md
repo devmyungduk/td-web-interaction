@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TD Web Interaction
 
-## Getting Started
+TouchDesigner와 웹 브라우저 간 실시간 3D 인터랙션 프로젝트
 
-First, run the development server:
+## 📋 개요
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+실시간 데이터 비주얼라이제이션 파이프라인:  
+**TouchDesigner ↔ Node.js WebSocket Server ↔ Next.js (React + Three.js)**
+
+서버는 데이터를 중계하고, 브라우저는 이를 3D 그래픽으로 렌더링합니다.
+
+---
+
+## 🗂️ 프로젝트 구조
+
+```
+td-web-interaction/
+├── app/
+│   ├── api/
+│   │   └── users/
+│   │       └── route.ts
+│   ├── components/
+│   │   ├── GlassObject.tsx      # 유리 재질 3D 오브젝트
+│   │   ├── Lights.tsx            # 조명 설정
+│   │   └── SceneCanvas.tsx       # Three.js 캔버스
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx                  # 메인 페이지
+├── lib/
+│   └── logger.ts                 # 로깅 유틸리티
+├── public/
+│   └── textures/
+│       └── studio_small_08_1k.hdr # HDR 환경맵
+├── server/
+│   └── websocket-server.js       # WebSocket 중계 서버
+├── .gitignore
+├── eslint.config.mjs
+├── next.config.ts
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏗️ 아키텍처
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Next.js 계층
 
-## Learn More
+```
+page.tsx
+  └─ SceneCanvas.tsx
+      └─ GlassObject.tsx
+```
 
-To learn more about Next.js, take a look at the following resources:
+| 파일 | 역할 |
+|------|------|
+| `page.tsx` | 앱 진입점 |
+| `SceneCanvas.tsx` | Three.js 렌더링 무대 |
+| `GlassObject.tsx` | 3D 메시 + 회전 애니메이션 |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. WebSocket 서버
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| 포트 | 용도 | 연결 대상 |
+|------|------|------------|
+| 9091 | WebSocket | TouchDesigner |
+| 9092 | WebSocket | 브라우저 |
 
-## Deploy on Vercel
+```
+TouchDesigner(9091) ◄──► Node.js Server ◄──► Browser(9092)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. 렌더링 파이프라인
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+<SceneCanvas>
+  <Canvas>
+    <Lights />
+    <Environment />
+    <GlassObject />  ← 실시간 데이터 반영
+  </Canvas>
+</SceneCanvas>
+```
+
+---
+
+## 🔄 데이터 흐름
+
+```
+① TouchDesigner → Node.js(9091)  : 실시간 데이터 전송
+② Node.js → Browser(9092)        : 브로드캐스트
+③ Browser → Node.js(9092→9091)   : 좌표/입력값 전송
+④ Browser → Three.js             : 3D 시각화
+```
+
+---
+
+## 🚀 시작하기
+
+### 필수 요구사항
+
+- Node.js 18+
+- TouchDesigner
+
+### 설치
+
+```bash
+npm install
+```
+
+### 실행
+
+```bash
+# WebSocket 서버 시작
+node server/websocket-server.js
+
+# Next.js 개발 서버 시작
+npm run dev
+```
+
+### TouchDesigner 데이터 전송 예시
+
+```python
+op('websocket1').sendText('Hello from TD!')
+```
+
+---
+
+## 🛠️ 기술 스택
+
+- **Frontend:** Next.js, React, Three.js, @react-three/fiber
+- **Backend:** Node.js, WebSocket
+- **3D:** Three.js, MeshPhysicalMaterial
+- **언어:** TypeScript
+
+---
+
+## 📌 핵심 기능
+
+- TouchDesigner ↔ 브라우저 간 양방향 실시간 통신
+- React + Three.js 기반 3D 렌더링
+- 유리 재질(Glass Material) 물리 기반 렌더링
+- HDR 환경맵 지원

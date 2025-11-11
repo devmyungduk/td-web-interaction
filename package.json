@@ -4,23 +4,39 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "install:ui": "npm install framer-motion@12.23.12 tailwindcss@4.1.16 postcss autoprefixer @headlessui/react@2.2.7 clsx@2.1.1 react-responsive@10.0.1 @heroicons/react@2.2.0",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.7",
+    "@heroicons/react": "^2.2.0",
+    "@react-three/drei": "^10.7.6",
+    "@react-three/fiber": "^9.4.0",
+    "autoprefixer": "^10.4.21",
+    "body-parser": "^2.2.0",
+    "clsx": "^2.1.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.553.0",
+    "next": "16.0.1",
+    "postcss": "^8.5.6",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "next": "16.0.1"
+    "react-responsive": "^10.0.1",
+    "three": "^0.181.1",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "16.0.1"
+    "eslint-config-next": "16.0.1",
+    "tailwindcss": "^4.1.16",
+    "typescript": "^5"
   }
 }
