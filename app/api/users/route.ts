@@ -4,8 +4,8 @@ import { logRequest, logInfo, logError } from '@/lib/logger';
 
 type User = { id: string; name: string };
 let users: User[] = [
-  { id: randomUUID(), name: '홍길동' },
-  { id: randomUUID(), name: '이몽룡' },
+  { id: randomUUID(), name: '댕댕이' },
+  { id: randomUUID(), name: '바닷가재' },
 ];
 
 export async function GET(req: NextRequest) {
