@@ -49,9 +49,11 @@ td-web-interaction/
 ### 1. Next.js 계층
 
 ```
-page.tsx
-  └─ SceneCanvas.tsx
-      └─ GlassObject.tsx
+┌────────────────────────────────────────────────────────┐
+│ page.tsx                                               │
+│   <SceneCanvas /> ─────▶ SceneCanvas.tsx               │
+│       └──▶ GlassObject.tsx                             │
+└────────────────────────────────────────────────────────┘
 ```
 
 | 파일 | 역할 |
@@ -68,19 +70,26 @@ page.tsx
 | 9092 | WebSocket | 브라우저 |
 
 ```
-TouchDesigner(9091) ◄──► Node.js Server ◄──► Browser(9092)
+┌──────────────────────────────────────────────────────────────┐
+│ websocket-server.js                                          │
+│──────────────────────────────────────────────────────────────│
+│ TD(9091) ◄── WebSocket Server ──► Browser(9092)              │
+│ 양방향 데이터 중계 (TD ↔ 브라우저)                          │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ### 3. 렌더링 파이프라인
 
 ```
-<SceneCanvas>
-  <Canvas>
-    <Lights />
-    <Environment />
-    <GlassObject />  ← 실시간 데이터 반영
-  </Canvas>
-</SceneCanvas>
+┌──────────────────────────────────────────────────────────────┐
+│ <SceneCanvas>                                                │
+│   <Canvas>                                                   │
+│     <Lights />                                               │
+│     <Environment />                                          │
+│     <GlassObject /> ← 3D 메시 렌더링                         │
+│   </Canvas>                                                  │
+│ </SceneCanvas>                                               │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ---
