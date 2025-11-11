@@ -253,7 +253,7 @@ export default function WhatAreYou() {
         {/* 입력 필드 및 추가 버튼 */}
         <div className="flex gap-3">
           <input
-            placeholder="your thought..."
+            placeholder="send to TD"
             value={name}
             onChange={(e) => setName(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
@@ -278,7 +278,7 @@ export default function WhatAreYou() {
                                      inset_-2px_-2px_8px_rgba(0,0,0,0.3)]
                        transition-all duration-300"
           >
-            추가
+            SEND
           </motion.button>
         </div>
       </motion.div>

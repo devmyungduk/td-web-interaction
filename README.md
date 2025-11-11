@@ -126,7 +126,8 @@ C:\Users> cd Desktop/test-log-json/td-web-interaction
 C:\Users\Desktop\test-log-json\td-web-interaction> npm install
 
 # WebSocket 서버 시작 (터미널 1)
-C:\Users\Desktop\test-log-json\td-web-interaction> node server/websocket-server.js
+C:\Users\Desktop\test-log-json\td-web-interaction> cd server
+C:\Users\Desktop\test-log-json\td-web-interaction\server> node websocket-server.js
 
 # Next.js 개발 서버 시작 (새 터미널 2)
 C:\Users\Desktop\test-log-json\td-web-interaction> npm run dev
