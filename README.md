@@ -187,6 +187,5 @@ op('websocket1').sendText('Hello from TD!')
 
 - TouchDesigner ↔ 브라우저 간 양방향 실시간 통신
 - React + Three.js 기반 3D 렌더링
-- 유리 재질(Glass Material) 물리 기반 렌더링
 - HDR 환경맵 지원
 - Unity / Unreal Engine 확장
