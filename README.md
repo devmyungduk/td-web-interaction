@@ -177,9 +177,8 @@ op('websocket1').sendText('Hello from TD!')
 
 ## 🛠️ 기술 스택
 
-- **Frontend:** Next.js, React, Three.js, @react-three/fiber
+- **Frontend:** Next.js, React
 - **Backend:** Node.js, WebSocket
-- **3D:** Three.js, MeshPhysicalMaterial
 - **언어:** TypeScript
 
 ---
@@ -190,3 +189,4 @@ op('websocket1').sendText('Hello from TD!')
 - React + Three.js 기반 3D 렌더링
 - 유리 재질(Glass Material) 물리 기반 렌더링
 - HDR 환경맵 지원
+- Unity / Unreal Engine 확장
