@@ -2,7 +2,7 @@
 
 <img src="./assets/screenshot.png" width="800">
 
-TouchDesigner와 웹 브라우저 간 실시간 데이터 송수신 프로젝트
+TouchDesigner와 웹 브라우저 간 실시간 데이터 송수신 시스템
 
 ## 📋 개요
 
