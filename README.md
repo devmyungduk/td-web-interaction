@@ -67,7 +67,7 @@ Execute DAT이나 CHOP Execute DAT에 넣어 원하는 시점에 실행합니다
 ```python
 import json
 
-def onReceiveText(dat, rowIndex, message, bytes):
+def onReceiveText(dat, rowIndex, message):
     data = json.loads(message)
     if data['type'] == 'mouse':
         op('constant1').par.value0 = data['x']
