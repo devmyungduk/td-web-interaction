@@ -3,7 +3,14 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SceneCanvas from './components/SceneCanvas';
-import { resolveWsUrl, STORAGE_KEY, MAX_ENTRIES, MOUSE_THROTTLE_MS, MESSAGE_LIFETIME_MS } from '@/lib/config';
+import {
+  resolveWsUrl,
+  STORAGE_KEY,
+  MAX_ENTRIES,
+  MOUSE_THROTTLE_MS,
+  MESSAGE_LIFETIME_MS,
+  CONNECT_TIMEOUT_MS,
+} from '@/lib/config';
 import { startSimulation } from '@/lib/simulator';
 
 type Entry = { id: string; name: string };
@@ -72,6 +79,7 @@ export default function Home() {
   useEffect(() => {
     let stopSimulation: (() => void) | null = null;
     let socket: WebSocket | null = null;
+    let timer: ReturnType<typeof setTimeout> | null = null;
 
     const fallbackToSimulation = () => {
       if (stopSimulation) return;
@@ -83,7 +91,20 @@ export default function Home() {
       socket = new WebSocket(resolveWsUrl());
       wsRef.current = socket;
 
-      socket.onopen = () => setStatus('connected');
+      // 도달할 수 없는 주소는 오류가 늦게 오거나 오지 않는다. 정해진
+      // 시간이 지나면 소켓을 닫고 데모 모드로 넘어간다. 소켓을 닫아야
+      // 뒤늦게 열린 연결이 상태 표시를 되돌리지 않는다.
+      timer = setTimeout(() => {
+        if (socket?.readyState !== WebSocket.OPEN) {
+          socket?.close();
+          fallbackToSimulation();
+        }
+      }, CONNECT_TIMEOUT_MS);
+
+      socket.onopen = () => {
+        if (timer) clearTimeout(timer);
+        setStatus('connected');
+      };
       socket.onmessage = (event) => showMessage(String(event.data));
       socket.onerror = fallbackToSimulation;
       socket.onclose = fallbackToSimulation;
@@ -92,6 +113,7 @@ export default function Home() {
     }
 
     return () => {
+      if (timer) clearTimeout(timer);
       stopSimulation?.();
       socket?.close();
       wsRef.current = null;

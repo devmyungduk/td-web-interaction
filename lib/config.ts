@@ -15,6 +15,11 @@ export function resolveWsUrl(): string {
   return `${protocol}://${window.location.hostname}:${port}`;
 }
 
+// 연결을 기다리는 시간(ms). 이 시간을 넘기면 데모 모드로 넘어간다.
+// 도달할 수 없는 주소로 접속하면 브라우저가 TCP 시간초과까지 오류를
+// 알리지 않아, 기다리지 않으면 화면이 연결 중 상태로 오래 멈춘다.
+export const CONNECT_TIMEOUT_MS = 2000;
+
 // 화면에 유지하는 입력 기록 개수.
 export const MAX_ENTRIES = 5;
 
