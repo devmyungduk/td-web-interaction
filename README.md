@@ -23,13 +23,7 @@
 
 ## 구조
 
-```mermaid
-flowchart LR
-  T["TouchDesigner"] <--> S["WebSocket 중계 서버<br/>8080"]
-  S <--> B["브라우저<br/>Three.js 렌더링"]
-```
-
-한 포트에 양쪽이 접속하고, 서버는 받은 메시지를 보낸 쪽을 제외한 모든 접속자에게 전달합니다.
+TouchDesigner와 브라우저가 중계 서버(`8080`)에 함께 접속하고, 서버는 받은 메시지를 보낸 쪽을 제외한 모든 접속자에게 전달합니다.
 
 ## 실행
 
@@ -98,19 +92,15 @@ def onReceiveText(dat, rowIndex, message, bytes):
 
 ## 구성
 
-```
-app/
-  page.tsx              화면. WebSocket 연결, 입력, 메시지 표시
-  components/
-    SceneCanvas.tsx     Three.js 캔버스와 HDR 환경맵
-    GlassObject.tsx     유리 재질 오브젝트
-lib/
-  config.ts             접속 주소와 상수
-  simulator.ts          서버가 없을 때 쓰는 데모용 생성기
-server/
-  websocket-server.mjs  중계 서버
-public/textures/        HDR 환경맵
-```
+| 경로 | 내용 |
+|---|---|
+| `app/page.tsx` | 화면. WebSocket 연결, 입력, 메시지 표시 |
+| `app/components/SceneCanvas.tsx` | Three.js 캔버스와 HDR 환경맵 |
+| `app/components/GlassObject.tsx` | 유리 재질 오브젝트 |
+| `lib/config.ts` | 접속 주소와 상수 |
+| `lib/simulator.ts` | 서버가 없을 때 쓰는 데모용 생성기 |
+| `server/websocket-server.mjs` | 중계 서버 |
+| `public/textures/` | HDR 환경맵 |
 
 Next.js 16 · React 19 · TypeScript · Three.js · @react-three/fiber · @react-three/drei · Framer Motion · Tailwind CSS 4 · ws
 
