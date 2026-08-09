@@ -6,7 +6,7 @@
 
 <img src="./assets/screenshot.png" alt="유리 오브젝트가 회전하는 3D 씬 위에 TouchDesigner에서 받은 메시지가 떠 있는 화면" width="800">
 
-**[데모 열기](https://devmyungduk.github.io/td-web-interaction/)** — 설치 없이 화면 동작을 확인할 수 있습니다. 연결할 서버가 없으면 데모 모드로 전환되어 예시 데이터가 흐릅니다.
+**[데모 열기](https://devmyungduk.github.io/td-web-interaction/)** — 설치 없이 동작을 확인할 수 있습니다. 배포된 페이지는 로컬 중계 서버에 접속할 수 없으므로 데모 모드로 전환되어, TouchDesigner가 보낼 만한 값을 대신 만들어 넣습니다. **화면에 떠오르는 메시지가 수신 결과**이고, 실제 연결에서는 그 자리에 TouchDesigner가 보낸 값이 표시됩니다.
 
 ## 두 저장소의 역할
 
