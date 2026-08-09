@@ -8,19 +8,6 @@
 
 **[데모 열기](https://devmyungduk.github.io/td-web-interaction/)** — 설치 없이 동작을 확인할 수 있습니다. 배포된 페이지는 로컬 중계 서버에 접속할 수 없으므로 데모 모드로 전환되어, TouchDesigner가 보낼 만한 값을 대신 만들어 넣습니다. **화면에 떠오르는 메시지가 수신 결과**이고, 실제 연결에서는 그 자리에 TouchDesigner가 보낸 값이 표시됩니다.
 
-## 두 저장소의 역할
-
-중계 서버는 양쪽 모두 양방향입니다. 차이는 브라우저 화면이 무엇을 구현했는지입니다.
-
-| | [touchdesigner-web-bridge](https://github.com/devmyungduk/touchdesigner-web-bridge) | 이 저장소 |
-|---|---|---|
-| 브라우저 → TouchDesigner | 터치 좌표 · 텍스트 | 마우스 좌표 · 텍스트 |
-| TouchDesigner → 브라우저 | 구현하지 않음 | 떠다니는 메시지 |
-| 브라우저 화면 | 입력 컨트롤러 | Three.js 3D 시각화 |
-| 배포 데모 | 없음 | GitHub Pages |
-
-포트와 메시지 형식이 같아 어느 쪽 중계 서버를 써도 동작합니다.
-
 ## 구조
 
 <img src="./assets/pipeline.svg" alt="TouchDesigner와 브라우저가 WebSocket 중계 서버 8080 포트에 함께 접속해 서로 메시지를 주고받는 흐름" width="880">
@@ -89,8 +76,6 @@ def onReceiveText(dat, rowIndex, message, bytes):
         op('text1').par.text = data['content']
     return
 ```
-
-`touchdesigner-web-bridge`는 여기에 `type: "click"`을 더 보냅니다. 같은 콜백에서 함께 처리할 수 있습니다.
 
 ## 구성
 

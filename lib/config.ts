@@ -2,8 +2,6 @@
 //
 // 기본값은 접속한 호스트를 그대로 쓴다. 휴대기기에서 PC 주소로 열면
 // 그 주소로 WebSocket 이 연결되므로 코드를 고칠 필요가 없다.
-// 포트와 메시지 형식은 touchdesigner-web-bridge 와 동일하게 맞춰
-// 어느 쪽 중계 서버를 써도 동작한다.
 export function resolveWsUrl(): string {
   const configured = process.env.NEXT_PUBLIC_WS_URL;
   if (configured) return configured;
